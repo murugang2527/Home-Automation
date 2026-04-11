@@ -6,14 +6,13 @@ from deepface import DeepFace
 import time
 
 # ===== TELEGRAM =====
-BOT_TOKEN = "8458081017:AAFArP6GSiUEc3tNlIm1rEUJGMc-Mk7HBRA" # put your new token
-CHAT_ID = "6666968646"
+BOT_TOKEN = "11111.xxxxx" 
+CHAT_ID = "xxxxxxx"
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg})
 
-# ===== LOAD DATASET =====
 known_faces = []
 known_names = []
 
@@ -40,7 +39,7 @@ for file in os.listdir(dataset_path):
     except:
         print(f"Error loading {name}")
 
-print("Dataset loaded ✅")
+print("Dataset loaded ")
 
 # ===== CAMERA =====
 cap = cv2.VideoCapture(0)
@@ -82,7 +81,7 @@ while True:
                             (0, 255, 0), 2)
 
             else:
-                print("Unknown person 🚨")
+                print("Unknown person ")
 
                 cv2.putText(frame, "Unknown", (50, 50),
                             cv2.FONT_HERSHEY_SIMPLEX, 1,
@@ -91,7 +90,7 @@ while True:
                 # ===== SEND ALERT (NO SPAM) =====
                 current_time = time.time()
                 if current_time - last_alert_time > 10:
-                    send_telegram("🚨 Unknown person detected at home!")
+                    send_telegram("Unknown person detected at home!")
                     last_alert_time = current_time
 
     except Exception as e:
